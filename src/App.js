@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+
 
 function App() {
+
+  const [articleIds, setArticleIds] = useState([]);
+
+  // This useEffect will run once - on initial load only. That is the 
+  // effect of [].
+  useEffect(() => {
+    fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
+    .then((res) => res.json())
+    .then((data) => {
+      setArticleIds(data);
+    });
+  }, []); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <h1>Hey!</h1>
   );
 }
 
